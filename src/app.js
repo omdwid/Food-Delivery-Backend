@@ -17,6 +17,50 @@ app.use('/api/items/', itemsRouter)
 app.use('/api/organizations/', organizationsRouter)
 app.use('/api/pricings/', pricingRouter)
 
-app.post('/api/total_price', validateInput ,getTotalPrice)
+/**
+ * @openapi
+ * /api/total_price:
+ *  post:
+ *    summary: Calculate total price based on organization and item
+ *    tags: [Pricing]
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              zone:
+ *                type: string
+ *                default: central
+ *              total_distance:
+ *                type: integer
+ *                default: 12
+ *              organization_id:
+ *                type: number
+ *                default: 1
+ *              item_type:
+ *                type: string
+ *                default: perishable
+ *    responses:
+ *      200:
+ *        description: OK
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                totalPrice:
+ *                  type: number
+ *                final:
+ *                  type: object
+ *                  properties:
+ *                    organization_id: { type: "integer" }
+ *                    item_id: { type: "integer" }
+ *                    zone: { type: "string" }
+ *                    base_distance_in_km: { type: "number" }
+ *                    km_price: { type: "number" }
+ *                    fix_price: { type: "number" }
+ */
+app.post('/api/total_price', validateInput, getTotalPrice)
 
 export { app }
