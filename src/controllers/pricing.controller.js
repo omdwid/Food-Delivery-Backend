@@ -28,8 +28,6 @@ export const getTotalPrice = async (req, res, next) => {
       return itemRows.includes(row.item_id)
     })[0]
 
-    // console.log(final_row)
-
     const total_price =
       (Number(final_row.fix_price) +
         (total_distance - final_row.base_distance_in_km) *
